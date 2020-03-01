@@ -1,11 +1,6 @@
 <?php
 
-	// Controlador TABLERO
-	// Modelo Vista Controlador
-	// curso 2019/20
-
-	// importamos AUTOLOAD.PHP para que, automáticamente se importen
-	// todas las librerías PHP que me permiten trabajar con TWIG. 
+//Fabio Benitez Ramirez
 	require_once "vendor/autoload.php" ;
 
 	class BaseController 

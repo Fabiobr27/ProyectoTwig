@@ -1,5 +1,6 @@
 <?php
-
+// Controlador Usuario
+//Fabio Benitez Ramirez
 require_once "BaseController.php";
 require_once "libs/Sesion.php";
 require_once "Modelos/Usuario.php";
@@ -20,16 +21,11 @@ class UsuarioController extends BaseController {
     }
 
     public function mostrarPerfil() {
-/*
-        $ses = Sesion::getInstance();
-        $usr = $ses->getUsuario();
-        $idu = $usr->getIdUsu();
 
-        echo "HOLA";
-      */
-          $dat = Usuario::find(3);
-          echo $this->twig->render("showPerfil.php.twig", ['dat' => $dat]);
-         
+        $sesion = Sesion::getInstance();
+        $id = $sesion->getUsuario();
+        $dat = Usuario::find($id);
+        echo $this->twig->render("showPerfil.php.twig", ['dat' => $dat]);
     }
 
     public function mostrarCuentas() {
@@ -90,7 +86,7 @@ class UsuarioController extends BaseController {
 
         $usu->eliminar();
 
-        //mostramos la vista principal
+        
         header("Location: index.php?con=Usuario&ope=mostrarCuentas");
     }
 

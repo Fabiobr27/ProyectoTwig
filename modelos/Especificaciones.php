@@ -67,7 +67,7 @@ class Especificaciones {
 
    
     public static function findAll($codigoMod): array {
-        $db = new Database();
+         $db =  Database::getInstance();;
         $db->query("SELECT CodEspe, CodigoMod, Caballos, Año, Combustible FROM especificaciones WHERE codigoMod = $codigoMod;");
 
         $data = [];
@@ -77,21 +77,16 @@ class Especificaciones {
 
         return $data;
     }
-    /**
-     * Busca y devuelve una nota en particular
-     * 
-     * @param $codigoModelo
-     * @return Modelo
-     */
+    
     public static function find($codigoMod): Especificaciones {
-        $db = new Database();
+        $db =  Database::getInstance();
         $db->query("SELECT CodEspe, CodigoMod, Caballos, Año, Combustible FROM especificaciones  WHERE codigoMod = $codigoMod;");
 
         return $db->getObject("Especificaciones");
     }
 
     public function delete() {
-        $db = new Database();
+        $db =  Database::getInstance();
         $db->query("DELETE FROM nota WHERE idNot={$this->idNot} ;");
     }
 

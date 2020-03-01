@@ -1,9 +1,10 @@
 <?php
 
-// Fabio Benitez Ramirez
+// Modelo Usuario
+//Fabio Benitez Ramirez
 class Usuario {
 
-   private $idUsu;
+    private $idUsu;
     private $email;
     private $pass;
     private $nombre;
@@ -52,34 +53,32 @@ class Usuario {
     public function getEmail() {
         return $this->email;
     }
-    
-    
+
     public function setEmail($email) {
         $this->email = $email;
 
         return $this;
     }
-    
+
     public function setFecha($fec_nacimiento) {
         $this->fec_nac = $fec_nacimiento;
 
         return $this;
     }
 
-       public function getFecha() {
+    public function getFecha() {
         return $this->fec_nac;
     }
-       public function setFoto($foto) {
+
+    public function setFoto($foto) {
         $this->foto = $foto;
 
         return $this;
     }
 
-       public function getFoto() {
+    public function getFoto() {
         return $this->foto;
     }
-
-
 
     public function __toString() {
         try {
@@ -89,45 +88,43 @@ class Usuario {
         }
     }
 
-
     public static function findAll() {
-        $db = new Database();
+        $db = Database::getInstance();
         $db->query("SELECT * FROM usuario ;");
 
         $data = [];
         while ($obj = $db->getObject("Usuario"))
             array_push($data, $obj);
 
-        //
+
         return $data;
     }
 
     public static function find($idUsu): Usuario {
-        $db = new Database();
+        $db = Database::getInstance();
         $db->query("SELECT * FROM usuario  WHERE idUsu = $idUsu;");
 
         return $db->getObject("Usuario");
     }
 
     public function eliminar() {
-        $db = new Database();
+        $db = Database::getInstance();
         $db->query("delete from usuario where idUsu={$this->idUsu};");
     }
 
-     public function hacerAdmin() {
-        $db = new Database();
+    public function hacerAdmin() {
+        $db = Database::getInstance();
         $tipo = "Admin";
         $db->query("Update usuario set Tipo ='$tipo' where idUsu={$this->idUsu};");
     }
+
     public function insertar() {
-        $db = new Database;
+        $db = Database::getInstance();
         $consulta = "INSERT INTO usuario (email,pass,nombre,apellidos,fec_nac)  values ('{$this->email}',md5('{$this->pass}'),'{$this->nombre}','{$this->apellidos}','{$this->fec_nac}');";
-       
- 
-       $db->query($consulta);
+
+
+        $db->query($consulta);
         $this->idUsu = $db->lastId();
     }
-    
-  
 
 }

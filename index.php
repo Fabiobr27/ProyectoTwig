@@ -1,12 +1,11 @@
 <?php
-
+//Fabio Benitez Ramirez
 require_once "libs/Data.php";
 
 $con = $_GET["con"] ?? "login";
 $ope = $_GET["ope"] ?? "mostrar";
 
 
-//echo "$con, $ope<br/>" ;
 // creamos el nombre completo del controlador
 $nom = "{$con}Controller";
 

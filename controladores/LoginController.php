@@ -1,5 +1,6 @@
 <?php
-
+// Controlador Login
+//Fabio Benitez Ramirez
 require_once "BaseController.php";
 require_once "libs/Sesion.php";
 require_once "Modelos/Marca.php";
@@ -34,7 +35,7 @@ class LoginController extends BaseController {
                 $this->inicio();
             } else {
 
-                //echo $this->twig->render("Login.php.twig");
+                echo $this->twig->render("Login.php.twig");
             }
         }
     }
@@ -47,24 +48,10 @@ class LoginController extends BaseController {
     public function logout() {
 
 
-        session_start();
-
-
         $ses = Sesion::getInstance();
-
         $ses->close();
-
         $ses->redirect("index.php");
-
-
-
-
-        $_SESSION[] = [];
-
-        session_destroy();
-
-
-        //header("Location: index.php");
+   
     }
 
     public function registro() {
@@ -75,13 +62,13 @@ class LoginController extends BaseController {
         else:
 
 
-            // crear y guardar el tablero
+
             $nom = $_GET["nombre"];
             $fec = $_GET["fnac"];
             $ape = $_GET["apellidos"];
             $pass = $_GET["pass"];
             $ema = $_GET["email"];
-            // creamos el tablero
+            
             $usu = new Usuario();
             $usu->setNombre($nom);
             $usu->setFecha($fec);
@@ -89,11 +76,10 @@ class LoginController extends BaseController {
             $usu->setPass($pass);
             $usu->setEmail($ema);
 
-            // guardamos el tablero
+            
             $usu->insertar();
 
-            //echo $_SERVER["HTTP_HOST"] ;
-            // redirigimos al índice
+            
            header("Location: index.php");
 
         endif;

@@ -1,56 +1,40 @@
 <?php
 
-	
-	// curso 2019/20
+//Fabio Benitez Ramirez
+require_once "Data.php";
 
-	require_once "Data.php" ;
+class Database {
 
-	class Database 
-	{
-		private $pdo ;
-		private $res ;
+    private static $instancia = null;
 
-		/**
-		 * realiza la conexión con el motor de bases de datos
-		 */
-		public function __construct()
-		{
-			global $data ;
-			$this->pdo = new PDO("mysql:host=".$data["host"].";dbname=".$data["dbno"].";charset=utf8",$data["user"],$data["pass"])
-						 or die("Error de conexión con la base de datos.") ;
-		}
+    public function __construct() {
+        global $data;
+        $this->pdo = new PDO("mysql:host=" . $data["host"] . ";dbname=" . $data["dbno"] . ";charset=utf8", $data["user"], $data["pass"])
+                or die("Error de conexión con la base de datos.");
+    }
 
-		/**
-		 * cierra la conexión con la base de datos antes de que
-		 * se destruya el objeto Database.
-		 */
-		public function __destruct()
-		{
-			$this->pdo = null ;
-		}
+    public function getInstance() {
+        if (self::$instancia == null)
+            self::$instancia = new Database();
 
-		/**
-		 * realiza una consulta en la base de datos
-		 */
-		public function query($sql)
-		{
-			$this->res = $this->pdo->query($sql) ;
-		}
+        return self::$instancia;
+    }
 
-		/**
-		 * devuelve un registro en formato de objeto
-		 */
-		public function getObject($cls = "StdClass")
-		{
-			return $this->res->fetchObject($cls) ;
-		}
+    public function __destruct() {
+        $this->pdo = null;
+    }
 
-		/**
-		 * devuelve el último ID
-		 */
-		public function lastId()
-		{
-			return $this->pdo->lastInsertId() ;
-		}
+    public function query($sql) {
+        $this->res = $this->pdo->query($sql);
+    }
 
-	}
+   
+    public function getObject($cls = "StdClass") {
+        return $this->res->fetchObject($cls);
+    }
+
+    public function lastId() {
+        return $this->pdo->lastInsertId();
+    }
+
+}

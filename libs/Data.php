@@ -1,6 +1,6 @@
 <?php
 
-	//echo "<pre>".print_r($_SERVER, true)."</pre>" ;
+//Fabio Benitez Ramirez;
 	$path = "http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] ; 
 	$data = 
 	[
