@@ -1,0 +1,11 @@
+Options -Indexes
+RewriteEngine on
+
+RewriteRule ^$ 								index.php?ope=listar&con=tablero [L]
+RewriteRule ^tablero/ver$ 					index.php?ope=listar&con=nota 	 [L]
+RewriteRule ^tablero/anadir$ 				index.php?ope=anadir&con=tablero [L]
+RewriteRule ^tablero/editar/([1-9][0-9]*)$  index.php?ope=editar&con=tablero&id=$1 [L]
+
+RewriteRule ^nota/anadir/([1-9][0-9]*)$		index.php?ope=anadir&con=nota&id=$1 [L]
+
+RewriteRule ^nota/ver$ index.php?ope=ver&con=nota [QSA,L]
